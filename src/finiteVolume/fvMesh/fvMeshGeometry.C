@@ -231,9 +231,21 @@ Foam::volScalarField::Internal& Foam::fvMesh::setV0()
 {
     if (!V0Ptr_)
     {
-        FatalErrorInFunction
-            << "V0 is not available"
-            << abort(FatalError);
+        V0Ptr_ =
+            new DimensionedField<scalar, volMesh>
+            (
+                IOobject
+                (
+                    "V0",
+                    time().timeName(),
+                    *this,
+                    IOobject::NO_READ,
+                    IOobject::NO_WRITE,
+                    false
+                ),
+                *this,
+                dimVolume
+            );
     }
 
     return *V0Ptr_;

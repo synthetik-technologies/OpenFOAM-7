@@ -96,7 +96,7 @@ Foam::pointMesh::~pointMesh()
     {
         Pout<< "~pointMesh::pointMesh()"
             << endl;
-        error::printStack(Pout);
+//         error::printStack(Pout);
     }
 }
 

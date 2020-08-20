@@ -52,7 +52,7 @@ Foam::valuePointPatchField<Type>::valuePointPatchField
 )
 :
     pointPatchField<Type>(p, iF),
-    Field<Type>(p.size())
+    Field<Type>(p.size(), Zero)
 {}
 
 

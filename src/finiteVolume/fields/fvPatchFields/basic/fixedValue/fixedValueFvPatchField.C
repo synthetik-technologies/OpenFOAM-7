@@ -63,7 +63,7 @@ Foam::fixedValueFvPatchField<Type>::fixedValueFvPatchField
 :
     fvPatchField<Type>(ptf, p, iF, mapper, mappingRequired)
 {
-    if (mappingRequired && notNull(iF) && mapper.hasUnmapped())
+    if (mappingRequired && notNull(iF) && mapper.hasUnmapped() && debug)
     {
         WarningInFunction
             << "On field " << iF.name() << " patch " << p.name()

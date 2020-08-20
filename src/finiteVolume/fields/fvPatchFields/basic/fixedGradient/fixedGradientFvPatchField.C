@@ -67,7 +67,7 @@ Foam::fixedGradientFvPatchField<Type>::fixedGradientFvPatchField
     fvPatchField<Type>(ptf, p, iF, mapper),
     gradient_(mapper(ptf.gradient_))
 {
-    if (notNull(iF) && mapper.hasUnmapped())
+    if (notNull(iF) && mapper.hasUnmapped() && debug)
     {
         WarningInFunction
             << "On field " << iF.name() << " patch " << p.name()

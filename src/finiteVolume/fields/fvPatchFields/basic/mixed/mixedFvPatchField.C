@@ -73,7 +73,7 @@ Foam::mixedFvPatchField<Type>::mixedFvPatchField
     refGrad_(mapper(ptf.refGrad_)),
     valueFraction_(mapper(ptf.valueFraction_))
 {
-    if (mappingRequired && notNull(iF) && mapper.hasUnmapped())
+    if (mappingRequired && notNull(iF) && mapper.hasUnmapped() && debug)
     {
         WarningInFunction
             << "On field " << iF.name() << " patch " << p.name()

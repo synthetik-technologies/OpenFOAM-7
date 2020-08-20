@@ -71,7 +71,7 @@ Foam::labelList Foam::bandCompression(const labelListList& cellCellAddressing)
         forAll(visited, celli)
         {
             // find the lowest connected cell that has not been visited yet
-            if (!visited[celli])
+            if (!visited.get(celli))
             {
                 if (cellCellAddressing[celli].size() < minWeight)
                 {
@@ -103,9 +103,9 @@ Foam::labelList Foam::bandCompression(const labelListList& cellCellAddressing)
         {
             currentCell = nextCell.removeHead();
 
-            if (!visited[currentCell])
+            if (!visited.get(currentCell))
             {
-                visited[currentCell] = 1;
+                visited.set(currentCell, 1);
 
                 // add into cellOrder
                 newOrder[cellInOrder] = currentCell;
@@ -123,7 +123,7 @@ Foam::labelList Foam::bandCompression(const labelListList& cellCellAddressing)
                 forAll(neighbours, nI)
                 {
                     label nbr = neighbours[nI];
-                    if (!visited[nbr])
+                    if (!visited.get(nbr))
                     {
                         // not visited, add to the list
                         nbrs.append(nbr);
@@ -196,7 +196,7 @@ Foam::labelList Foam::bandCompression
         forAll(visited, celli)
         {
             // find the lowest connected cell that has not been visited yet
-            if (!visited[celli])
+            if (!visited.get(celli))
             {
                 if (numNbrs[celli] < minWeight)
                 {
@@ -228,9 +228,9 @@ Foam::labelList Foam::bandCompression
         {
             currentCell = nextCell.removeHead();
 
-            if (!visited[currentCell])
+            if (!visited.get(currentCell))
             {
-                visited[currentCell] = 1;
+                visited.set(currentCell, 1);
 
                 // add into cellOrder
                 newOrder[cellInOrder] = currentCell;
@@ -248,7 +248,7 @@ Foam::labelList Foam::bandCompression
                 for (label facei = start; facei < end; facei++)
                 {
                     label nbr = cellCells[facei];
-                    if (!visited[nbr])
+                    if (!visited.get(nbr))
                     {
                         // not visited, add to the list
                         nbrs.append(nbr);

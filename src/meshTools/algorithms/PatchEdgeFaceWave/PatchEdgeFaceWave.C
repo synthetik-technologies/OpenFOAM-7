@@ -90,9 +90,9 @@ updateEdge
 
     if (propagate)
     {
-        if (!changedEdge_[edgeI])
+        if (!changedEdge_.get(edgeI))
         {
-            changedEdge_[edgeI] = true;
+            changedEdge_.set(edgeI, true);
             changedEdges_.append(edgeI);
         }
     }
@@ -144,9 +144,9 @@ updateFace
 
     if (propagate)
     {
-        if (!changedFace_[facei])
+        if (!changedFace_.get(facei))
         {
-            changedFace_[facei] = true;
+            changedFace_.set(facei, true);
             changedFaces_.append(facei);
         }
     }
@@ -184,7 +184,7 @@ syncEdges()
         label patchEdgeI = patchEdges_[i];
         label coupledEdgeI = coupledEdges_[i];
 
-        if (changedEdge_[patchEdgeI])
+        if (changedEdge_.get(patchEdgeI))
         {
             const Type& data = allEdgeInfo_[patchEdgeI];
 
@@ -193,7 +193,7 @@ syncEdges()
             // master of coupled edge (optionally flipped)
             bool sameOrientation =
             (
-                sameEdgeOrientation_[i]
+                sameEdgeOrientation_.get(i)
              == cppOrientation[coupledEdgeI]
             );
 
@@ -251,7 +251,7 @@ syncEdges()
         {
             bool sameOrientation =
             (
-                sameEdgeOrientation_[i]
+                sameEdgeOrientation_.get(i)
              == cppOrientation[coupledEdgeI]
             );
 
@@ -265,10 +265,10 @@ syncEdges()
                 td_
             );
 
-            if (!changedEdge_[patchEdgeI])
+            if (!changedEdge_.get(patchEdgeI))
             {
                 changedEdges_.append(patchEdgeI);
-                changedEdge_[patchEdgeI] = true;
+                changedEdge_.set(patchEdgeI, true);
             }
         }
     }
@@ -471,9 +471,9 @@ setEdgeInfo
 
         // Mark edgeI as changed, both on list and on edge itself.
 
-        if (!changedEdge_[edgeI])
+        if (!changedEdge_.get(edgeI))
         {
-            changedEdge_[edgeI] = true;
+            changedEdge_.set(edgeI, true);
             changedEdges_.append(edgeI);
         }
     }
@@ -497,7 +497,7 @@ faceToEdge()
     {
         label facei = changedFaces_[changedFacei];
 
-        if (!changedFace_[facei])
+        if (!changedFace_.get(facei))
         {
             FatalErrorInFunction
                 << "face " << facei
@@ -562,7 +562,7 @@ edgeToFace()
     {
         label edgeI = changedEdges_[changedEdgeI];
 
-        if (!changedEdge_[edgeI])
+        if (!changedEdge_.get(edgeI))
         {
             FatalErrorInFunction
                 << "edge " << edgeI

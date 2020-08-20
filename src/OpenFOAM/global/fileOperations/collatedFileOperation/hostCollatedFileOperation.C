@@ -82,14 +82,14 @@ Foam::labelList Foam::fileOperations::hostCollatedFileOperation::subRanks
 
         for (label proci = Pstream::myProcNo(); proci >= 0; --proci)
         {
-            if (isIOrank[proci])
+            if (isIOrank.get(proci))
             {
                 // Found my master. Collect all processors with same master
                 subRanks.append(proci);
                 for
                 (
                     label rank = proci+1;
-                    rank < n && !isIOrank[rank];
+                    rank < n && !isIOrank.get(rank);
                     ++rank
                 )
                 {

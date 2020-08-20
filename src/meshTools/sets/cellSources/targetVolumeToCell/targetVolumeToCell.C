@@ -58,7 +58,7 @@ Foam::scalar Foam::targetVolumeToCell::volumeOfSet
     scalar sumVol = 0.0;
     forAll(selected, celli)
     {
-        if (selected[celli])
+        if (selected.get(celli))
         {
             sumVol += mesh_.cellVolumes()[celli];
         }
@@ -85,7 +85,7 @@ Foam::label Foam::targetVolumeToCell::selectCells
 
         if (maskSet[celli] && ((cc&n_) < normalComp))
         {
-            selected[celli] = true;
+            selected.set(celli, true);
             nSelected++;
         }
     }
@@ -115,7 +115,7 @@ void Foam::targetVolumeToCell::combine(topoSet& set, const bool add) const
 
         forAllConstIter(cellSet, subset, iter)
         {
-            maskSet[iter.key()] = 1;
+            maskSet.set(iter.key(), 1);
         }
 
         nTotCells = returnReduce(subset.size(), sumOp<label>());
@@ -253,7 +253,7 @@ void Foam::targetVolumeToCell::combine(topoSet& set, const bool add) const
 
     forAll(selected, celli)
     {
-        if (selected[celli])
+        if (selected.get(celli))
         {
             addOrDelete(set, celli, add);
         }

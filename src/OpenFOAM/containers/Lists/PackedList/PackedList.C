@@ -284,7 +284,7 @@ Foam::Istream& Foam::PackedList<nBits>::read(Istream& is)
                 {
                     for (label i=0; i<sz; ++i)
                     {
-                        lst[i] = lst.readValue(is);
+                        lst.set(i, lst.readValue(is));
 
                         is.fatalCheck
                         (

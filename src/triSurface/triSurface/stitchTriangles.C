@@ -126,7 +126,7 @@ bool Foam::triSurface::stitchTriangles
                 label newPointi = 0;
                 forAll(pointIsUsed, pointi)
                 {
-                    if (pointIsUsed[pointi])
+                    if (pointIsUsed.get(pointi))
                     {
                         ps[newPointi] = ps[pointi];
                         pointMap[pointi] = newPointi++;

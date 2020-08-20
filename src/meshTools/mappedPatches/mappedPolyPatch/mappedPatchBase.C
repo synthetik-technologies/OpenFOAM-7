@@ -745,9 +745,9 @@ void Foam::mappedPatchBase::calcMapping() const
             {
                 label facei = map[i];
 
-                if (used[facei] == 0)
+                if (used.get(facei) == 0)
                 {
-                    used[facei] = 1;
+                    used.set(facei, 1);
                 }
                 else
                 {
@@ -761,7 +761,7 @@ void Foam::mappedPatchBase::calcMapping() const
         }
         forAll(used, facei)
         {
-            if (used[facei] == 0)
+            if (used.get(facei) == 0)
             {
                 FatalErrorInFunction
                     << "On patch " << patch_.name()

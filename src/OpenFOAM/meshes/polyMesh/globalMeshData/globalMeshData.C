@@ -1214,7 +1214,7 @@ void Foam::globalMeshData::calcGlobalEdgeOrientation() const
             }
             else
             {
-                globalEdgeOrientation[edgeI] = (stat == 1);
+                globalEdgeOrientation.set(edgeI, (stat == 1));
             }
         }
     }
@@ -2463,7 +2463,7 @@ Foam::autoPtr<Foam::globalIndex> Foam::globalMeshData::mergePoints
         else
         {
             // connected slave point
-            isMaster[cpp.meshPoints()[pointi]] = 0;
+            isMaster.set(cpp.meshPoints()[pointi], 0);
         }
     }
 
@@ -2488,7 +2488,7 @@ Foam::autoPtr<Foam::globalIndex> Foam::globalMeshData::mergePoints
 
     forAll(isMaster, meshPointi)
     {
-        if (isMaster[meshPointi])
+        if (isMaster.get(meshPointi))
         {
             pointToGlobal[meshPointi] = globalPointsPtr().toGlobal(nMaster);
             uniquePoints[nMaster] = meshPointi;
@@ -2525,7 +2525,7 @@ Foam::autoPtr<Foam::globalIndex> Foam::globalMeshData::mergePoints
         {
             label meshPointi = cpp.meshPoints()[pointi];
 
-            if (!isMaster[meshPointi])
+            if (!isMaster.get(meshPointi))
             {
                 pointToGlobal[meshPointi] = masterToGlobal[pointi];
             }

@@ -142,7 +142,7 @@ Foam::label Foam::PackedBoolList::subsetIndices(const LabelListType& indices)
     forAll(indices, elemI)
     {
         const label& index = indices[elemI];
-        if (operator[](index))
+        if (this->get(index))
         {
             anded.set(index);
             ++cnt;

@@ -532,9 +532,10 @@ void Foam::fileMonitor::updateStates
         {
             forAll(state_, watchFd)
             {
-                stats[watchFd] = static_cast<unsigned int>
+                stats.set
                 (
-                    localState_[watchFd]
+                    watchFd,
+                    static_cast<unsigned int>(localState_[watchFd])
                 );
             }
         }
@@ -576,7 +577,7 @@ void Foam::fileMonitor::updateStates
         forAll(state_, watchFd)
         {
             // Assign synchronised state
-            unsigned int stat = stats[watchFd];
+            unsigned int stat = stats.get(watchFd);
             state_[watchFd] = fileState(stat);
 
             if (!masterOnly)

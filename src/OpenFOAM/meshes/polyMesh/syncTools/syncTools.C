@@ -85,9 +85,9 @@ Foam::PackedBoolList Foam::syncTools::getMasterPoints(const polyMesh& mesh)
           > 0
         )
         {
-            isMasterPoint[meshPointi] = true;
+            isMasterPoint.set(meshPointi, true);
         }
-        donePoint[meshPointi] = true;
+        donePoint.set(meshPointi, true);
     }
 
 
@@ -96,9 +96,9 @@ Foam::PackedBoolList Foam::syncTools::getMasterPoints(const polyMesh& mesh)
 
     forAll(donePoint, pointi)
     {
-        if (!donePoint[pointi])
+        if (!donePoint.get(pointi))
         {
-            isMasterPoint[pointi] = true;
+            isMasterPoint.set(pointi, true);
         }
     }
 
@@ -129,9 +129,9 @@ Foam::PackedBoolList Foam::syncTools::getMasterEdges(const polyMesh& mesh)
           > 0
         )
         {
-            isMasterEdge[meshEdgeI] = true;
+            isMasterEdge.set(meshEdgeI, true);
         }
-        doneEdge[meshEdgeI] = true;
+        doneEdge.set(meshEdgeI, true);
     }
 
 
@@ -140,9 +140,9 @@ Foam::PackedBoolList Foam::syncTools::getMasterEdges(const polyMesh& mesh)
 
     forAll(doneEdge, edgeI)
     {
-        if (!doneEdge[edgeI])
+        if (!doneEdge.get(edgeI))
         {
-            isMasterEdge[edgeI] = true;
+            isMasterEdge.set(edgeI, true);
         }
     }
 

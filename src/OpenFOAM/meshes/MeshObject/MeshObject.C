@@ -476,11 +476,14 @@ void Foam::meshObject::clear(objectRegistry& obr)
 
     forAllIter(typename HashTable<MeshObjectType<Mesh>*>, meshObjects, iter)
     {
-        if (meshObject::debug)
+        if (!isA<PatchMeshObject<Mesh>>(*iter()))
         {
-            Pout<< "    Destroying " << iter()->name() << endl;
+            if (meshObject::debug)
+            {
+                Pout<< "    Destroying " << iter()->name() << endl;
+            }
+            obr.checkOut(*iter());
         }
-        obr.checkOut(*iter());
     }
 }
 
